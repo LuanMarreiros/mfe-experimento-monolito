@@ -23,7 +23,7 @@ export class FinalizacaoComponent implements OnInit {
   }
 
   public get valorLCP() {
-    return this._valorLCP;
+    return this._valorLCP / 1000;
   }
 
   public ngOnInit(): void {
