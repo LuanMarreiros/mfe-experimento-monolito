@@ -14,7 +14,6 @@ import { ContadorService } from 'src/app/shared/services/contador/contador.servi
 export class FinalizacaoComponent implements AfterViewInit {
   private contadorService = inject(ContadorService);
   private changeDetector = inject(ChangeDetectorRef);
-  public exibir = false;
 
   public valorLCP = 0;
 
@@ -38,7 +37,6 @@ export class FinalizacaoComponent implements AfterViewInit {
     new PerformanceObserver((entryList) => {
       for (const entry of entryList.getEntries()) {
         this.valorLCP = (entry as PerformanceEntry).startTime;
-        this.exibir = true;
         this.changeDetector.detectChanges();
       }
     }).observe({ type: 'largest-contentful-paint', buffered: true });
