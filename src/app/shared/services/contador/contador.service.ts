@@ -34,13 +34,4 @@ export class ContadorService {
 
     return entries.filter((entrie) => entrie !== undefined);
   }
-
-  public consultarLCP(callback: (lcp: number) => void): void {
-    new PerformanceObserver((entryList) => {
-      for (const entry of entryList.getEntries()) {
-        const lcp = (entry as PerformanceEntry).startTime;
-        callback(lcp);
-      }
-    }).observe({ type: 'largest-contentful-paint', buffered: true });
-  }
 }

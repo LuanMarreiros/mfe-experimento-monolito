@@ -1,4 +1,9 @@
-import { Component, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  inject,
+} from '@angular/core';
 import { ContadorService } from 'src/app/shared/services/contador/contador.service';
 
 @Component({
@@ -6,9 +11,12 @@ import { ContadorService } from 'src/app/shared/services/contador/contador.servi
   templateUrl: './finalizacao.component.html',
   styleUrls: ['./finalizacao.component.scss'],
 })
-export class FinalizacaoComponent {
+export class FinalizacaoComponent implements AfterViewInit {
   private contadorService = inject(ContadorService);
-  private _valorLCP = 0;
+  private changeDetector = inject(ChangeDetectorRef);
+  public exibir = false;
+
+  public valorLCP = 0;
 
   public get tempoExecucao() {
     return this.contadorService.consultarTempoTotal();
@@ -22,15 +30,17 @@ export class FinalizacaoComponent {
     return ['name', 'initiatorType', 'duration'];
   }
 
-  public get valorLCP() {
-    this.consultarLCP();
-
-    return this._valorLCP / 1000;
+  public ngAfterViewInit(): void {
+    this.realizarConsultaLCP();
   }
 
-  private consultarLCP() {
-    return this.contadorService.consultarLCP((LCP) => {
-      this._valorLCP = LCP;
-    });
+  private realizarConsultaLCP(): void {
+    new PerformanceObserver((entryList) => {
+      for (const entry of entryList.getEntries()) {
+        this.valorLCP = (entry as PerformanceEntry).startTime;
+        this.exibir = true;
+        this.changeDetector.detectChanges();
+      }
+    }).observe({ type: 'largest-contentful-paint', buffered: true });
   }
 }

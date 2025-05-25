@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="exibir">
   <p>Finalizado com sucesso!</p>
   <p>Tempo de execução: {{ tempoExecucao }}s</p>
-  <p>Valor LCP : {{ valorLCP }}s</p>
+  <p>Valor LCP : {{ valorLCP / 1000 }}s</p>
 
   <table
     mat-table
