@@ -16,4 +16,8 @@ export class FinalizacaoComponent {
   public get tempoCarregamentoPagina() {
     return this.contadorService.consultarTempoDeCarregamentoDaPagina();
   }
+
+  public get displayedColumns() {
+    return ['name', 'initiatorType', 'duration'];
+  }
 }

@@ -22,13 +22,16 @@ export class ContadorService {
   }
 
   public consultarTempoDeCarregamentoDaPagina() {
-    const tempoDeNavegacao = window.performance.getEntriesByType(
-      'navigation',
-    )[0] as PerformanceNavigationTiming;
+    const entries = performance
+      .getEntriesByType('resource')
+      .map((entry: object) => {
+        if ((entry as PerformanceNavigationTiming).initiatorType === 'script') {
+          return entry;
+        }
 
-    const tempoCarregamento =
-      tempoDeNavegacao.loadEventEnd - tempoDeNavegacao.startTime;
+        return;
+      });
 
-    return (tempoCarregamento / 1000).toFixed(3);
+    return entries.filter((entrie) => entrie !== undefined);
   }
 }

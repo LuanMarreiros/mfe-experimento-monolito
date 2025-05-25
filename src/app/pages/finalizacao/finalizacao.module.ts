@@ -1,3 +1,4 @@
+import { MatTableModule } from '@angular/material/table';
 import { PrimeiraEtapaModule } from '../primeira-etapa/primeira-etapa.module';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +9,7 @@ import { TerceiraEtapaModule } from '../terceira-etapa/terceira-etapa.module';
 import { FinalizacaoComponent } from './finalizacao.component';
 import { MatIconModule } from '@angular/material/icon';
 
-const modules = [MatButtonModule, MatIconModule];
+const modules = [MatButtonModule, MatIconModule, MatTableModule];
 
 @NgModule({
   imports: [
