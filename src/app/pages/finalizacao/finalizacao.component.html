@@ -13,7 +13,9 @@
     <!-- Position Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Nome do arquivo</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.name.split("net/")[1] }}
+      </td>
     </ng-container>
 
     <!-- Name Column -->
