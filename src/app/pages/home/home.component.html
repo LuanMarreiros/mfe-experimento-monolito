@@ -1,0 +1,40 @@
+<app-header></app-header>
+
+<mat-stepper [linear]="true" #stepper>
+  <mat-step
+    [stepControl]="primeiraEtapaFormGroup"
+    label="Conclua a primeira etapa"
+  >
+    <app-primeira-etapa
+      (etapaFinalizada)="
+        onFinalizaProcesso(primeiraEtapaFormGroup); stepper.next()
+      "
+    ></app-primeira-etapa>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="segundaEtapaFormGroup"
+    label="Conclua a segunda etapa"
+  >
+    <app-segunda-etapa
+      (etapaFinalizada)="
+        onFinalizaProcesso(segundaEtapaFormGroup); stepper.next()
+      "
+    ></app-segunda-etapa>
+  </mat-step>
+
+  <mat-step
+    [stepControl]="terceiraEtapaFormGroup"
+    label="Conclua a terceira etapa"
+  >
+    <app-terceira-etapa
+      (etapaFinalizada)="
+        onFinalizaProcesso(terceiraEtapaFormGroup); stepper.next()
+      "
+    ></app-terceira-etapa>
+  </mat-step>
+
+  <mat-step label="Etapas finalizadas">
+    <app-finalizacao></app-finalizacao>
+  </mat-step>
+</mat-stepper>

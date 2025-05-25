@@ -1,0 +1,9 @@
+<div class="mb-2" *ngIf="mostrarLoading; else mostrarConteudo">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<ng-template #mostrarConteudo>
+  <button mat-raised-button color="primary" (click)="iniciarProcesso()">
+    Iniciar
+  </button>
+</ng-template>
