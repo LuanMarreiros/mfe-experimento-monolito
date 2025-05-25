@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ContadorService } from 'src/app/shared/services/contador/contador.service';
 
 @Component({
@@ -6,8 +6,9 @@ import { ContadorService } from 'src/app/shared/services/contador/contador.servi
   templateUrl: './finalizacao.component.html',
   styleUrls: ['./finalizacao.component.scss'],
 })
-export class FinalizacaoComponent {
+export class FinalizacaoComponent implements OnInit {
   private contadorService = inject(ContadorService);
+  private _valorLCP = 0;
 
   public get tempoExecucao() {
     return this.contadorService.consultarTempoTotal();
@@ -19,5 +20,19 @@ export class FinalizacaoComponent {
 
   public get displayedColumns() {
     return ['name', 'initiatorType', 'duration'];
+  }
+
+  public get valorLCP() {
+    return this._valorLCP;
+  }
+
+  public ngOnInit(): void {
+    this.consultarLCP();
+  }
+
+  private consultarLCP() {
+    return this.contadorService.consultarLCP((LCP) => {
+      this._valorLCP = LCP;
+    });
   }
 }
