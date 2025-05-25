@@ -1,4 +1,6 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Rotas } from 'src/app/enum/rotas.enum';
 import { HttpRequestService } from 'src/app/shared/services/http-request/http-request.service';
 
 @Component({
@@ -10,6 +12,7 @@ export class SegundaEtapaComponent implements OnInit {
   @Output() etapaFinalizada = new EventEmitter();
 
   private httpRequestService = inject(HttpRequestService);
+  private router = inject(Router);
   private _mostrarLoading = false;
 
   public get mostrarLoading() {
@@ -26,7 +29,7 @@ export class SegundaEtapaComponent implements OnInit {
         this.finalizarProcesso();
       },
       error: () => {
-        this.finalizarProcesso();
+        this.router.navigateByUrl(Rotas.Erro);
       },
       complete: () => {
         this._mostrarLoading = false;

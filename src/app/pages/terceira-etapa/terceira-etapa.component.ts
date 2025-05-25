@@ -1,5 +1,7 @@
-import { ContadorService } from './../../shared/services/contador/contador.service';
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { Rotas } from 'src/app/enum/rotas.enum';
+import { ContadorService } from 'src/app/shared/services/contador/contador.service';
 import { HttpRequestService } from 'src/app/shared/services/http-request/http-request.service';
 
 @Component({
@@ -12,6 +14,7 @@ export class TerceiraEtapaComponent implements OnInit {
 
   private httpRequestService = inject(HttpRequestService);
   private contadorService = inject(ContadorService);
+  private router = inject(Router);
   private _mostrarLoading = false;
 
   public get mostrarLoading() {
@@ -28,7 +31,7 @@ export class TerceiraEtapaComponent implements OnInit {
         this.finalizarProcesso();
       },
       error: () => {
-        this.finalizarProcesso();
+        this.router.navigateByUrl(Rotas.Erro);
       },
       complete: () => {
         this._mostrarLoading = false;
