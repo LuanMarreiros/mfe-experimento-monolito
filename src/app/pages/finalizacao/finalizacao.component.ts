@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ContadorService } from 'src/app/shared/services/contador/contador.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { ContadorService } from 'src/app/shared/services/contador/contador.servi
   templateUrl: './finalizacao.component.html',
   styleUrls: ['./finalizacao.component.scss'],
 })
-export class FinalizacaoComponent implements OnInit {
+export class FinalizacaoComponent {
   private contadorService = inject(ContadorService);
   private _valorLCP = 0;
 
@@ -23,11 +23,9 @@ export class FinalizacaoComponent implements OnInit {
   }
 
   public get valorLCP() {
-    return this._valorLCP / 1000;
-  }
-
-  public ngOnInit(): void {
     this.consultarLCP();
+
+    return this._valorLCP / 1000;
   }
 
   private consultarLCP() {
